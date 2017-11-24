@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			span{margin-right: 20px;}
+		</style>
+		<script src = "../vue.js"></script>
+	</head>
+	<body>
+		
+
+		<ul id = "demo">
+			<p>当前有{{hotNumber}}个热门商品</p>
+			<li v-for = "info in listInfo">
+				<span>名称： {{info.name}}</span>
+				<span>数量： {{info.number}}</span>
+				<span>价格： {{info.price}}</span>
+			</li>
+		</ul>
+		
+		<script>
+			var demoData = {
+				listInfo:[
+					{
+						name: "袜子",
+						number: "5",
+						price: "¥5.0",
+						hot:true
+					},{
+						name: "裤子",
+						number: "1",
+						price: "¥500.0",
+						hot:false
+					},{
+						name: "裤子",
+						number: "1",
+						price: "¥500.0",
+						hot:true
+					},{
+						name: "帽子",
+						number: "2",
+						price: "¥30.0",
+						hot:true
+					},{
+						name: "裤子",
+						number: "1",
+						price: "¥500.0",
+						hot:false
+					}
+				]
+			};
+			
+			var vue = new Vue({
+				el:"#demo",
+				data: demoData,
+				computed:{
+					hotNumber:function(){
+						var hots = this.listInfo.filter(function(item){
+							return item.hot;
+						});
+						return hots.length;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

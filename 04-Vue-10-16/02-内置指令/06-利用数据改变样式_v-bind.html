@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.active{
+				color:red; 
+			}
+			.fontSize{
+				font-size: 50px;
+			}
+		
+		</style>
+		<script src = "../vue.js"></script>
+	</head>
+	<body>
+		
+		<div id = "demo">
+			<input type="checkbox" v-model = "isActive" />
+			<span class = "fontSize" :class = {active:isActive}>CSS样式</span>
+			
+		</div>
+		<script>
+			var demoData = {
+				isActive: false
+			};
+			
+			var vue = new Vue({
+				el:"#demo",
+				data: demoData
+				
+			});
+		</script>
+	</body>
+</html>

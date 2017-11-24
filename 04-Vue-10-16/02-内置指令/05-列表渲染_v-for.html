@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			span{margin-right: 20px;}
+		</style>
+		<script src = "../vue.js"></script>
+	</head>
+	<body>
+		
+		<ul id = "demo">
+			<li v-for = "info in listInfo">
+				<span>名称： {{info.name}}</span>
+				<span>数量： {{info.number}}</span>
+				<span>价格： {{info.price}}</span>
+			</li>
+			<!--<li v-for = "(info ,index) in listInfo">
+				第{{index + 1}}条：
+				<span>名称： {{info.name}}</span>
+				<span>数量： {{info.number}}</span>
+				<span>价格： {{info.price}}</span>
+			</li>-->
+		</ul>
+		
+		<script>
+			var demoData = {
+				listInfo:[
+					{
+						name: "袜子",
+						number: "5",
+						price: "¥5.0"
+					},{
+						name: "帽子",
+						number: "2",
+						price: "¥30.0"
+					},{
+						name: "裤子",
+						number: "1",
+						price: "¥500.0"
+					}
+				]
+			};
+			
+			var vue = new Vue({
+				el:"#demo",
+				data: demoData
+			});
+		</script>
+	</body>
+</html>

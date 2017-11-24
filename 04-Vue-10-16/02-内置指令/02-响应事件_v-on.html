@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src = "../vue.js"></script>
+	</head>
+	<body>
+		
+		<div id = "demo">
+			<input type="button" value="按钮" v-on:click = "clickButton"/>
+		</div>
+		<script>
+			var vue = new Vue({
+				el:"#demo",
+				methods:{ //统一管理响应事件和函数方法等
+					clickButton : function(){
+						console.log("Vue的按钮被点击了");
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
