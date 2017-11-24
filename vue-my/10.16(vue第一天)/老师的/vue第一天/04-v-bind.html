@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 绑定一个属性 -->
+
+			<img :src="imageSrc" alt="" />
+			<input type="text" v-model = "imageSrc"/>
+		</div>
+		
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		
+	
+		
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#app",
+				data:{
+					imageSrc: '01.jpg'
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			
+			<c1></c1>
+			<c2></c2>
+		</div>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			var eventBus = new Vue({});
+			
+			Vue.component('c1',{
+				template:`<div>
+					c1
+					<button @click = "c1click">c1</button>
+				
+				</div>`
+				,
+				methods:{
+					c1click(){
+						eventBus.$emit('c1click' , 2);
+					}
+				}
+			})
+			
+			Vue.component('c2',{
+				template:`<div>
+					c2
+					
+				
+				</div>`
+				,
+				mounted(){
+					eventBus.$on('c1click',function(val){
+						console.log('我监听到了c1click 事件' + val);
+					});
+				}
+				
+			})
+			new Vue({
+				el: '#app'
+			})
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src = "../vue.js"></script>
+	</head>
+	<body>
+		<div id = "demo">
+			<input type="text" placeholder="按下Enter" @keyup.enter = "onEnter" />
+		</div>
+		<script>
+			var demoData = {
+				
+			};
+			
+			var vue = new Vue({
+				el:"#demo",
+				data: demoData,
+				methods:{
+					onEnter: function(){
+						console.log("按了Enter键");
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

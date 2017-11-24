@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script src = "../vue.js"></script>
+	</head>
+	<body>
+		
+		<div id = "demo">
+			<div v-bind = "{id: userId, name: userName}"></div>
+		</div>
+		<script>
+			var demoData = {
+				userId: "001",
+				userName:"江山"
+			};
+			
+			var vue = new Vue({
+				el:"#demo",
+				data: demoData
+				
+			});
+		</script>
+	</body>
+</html>

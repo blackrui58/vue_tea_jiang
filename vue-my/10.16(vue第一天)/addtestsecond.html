@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="index.css"/>
+		<style>
+			.del{
+				text-decoration: line-through;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>第二次自己重新写</h1>
+		<div id="app">
+			<h3>添加任务:</h3>
+			<!--数据输入框-->
+			<input class="ip" type="text"  placeholder="提示:回车即可添加任务" @keydown.enter="addData" v-model="addD"/>
+			{{addD}}
+			<div class="state"	>
+				<div class="left" style="color:#ffa500;">{{sumNoCom}}个任务未完成</div>
+				<ul class="right">
+					<a href="#all" class="on">所有任务</a>
+					<a href="#notest" >未完成的任务</a>
+					<a href="#dotest" >完成的任务</a>					
+				</ul>
+			</div>
+			<h3 style="margin-top:10px;">任务列表:</h3>
+			<!--//任务列表	任务列表任务列表任务列表-->	
+			<ul class="task">
+				<!--每个li是一条数据-->
+				<li  class="normal" v-for="(item,index) in checkArr">
+					<!--数据显示部分-->
+					<div  class="normal" >
+						<!--选中框-->
+						<input type="checkbox" @click="boxIsCheck(index)" :checked="item.ischeck"/>	
+						<!--信息显示框-->
+						<strong v-bind:class='{del:item.ischeck}'>{{item.uname}}</strong>
+						<!--delData(index)中参数的传入是为了确定到底需要删除的是哪条数据-->
+						<button @click="delData(index)" >删除</button>
+					</div>
+					
+					<br/>
+					<!--编辑部分-->
+					<div class="editing" v-show="false">
+						<input type="text"   class="ip" />
+					</div>					
+				</li>
+				{{arr}}
+				{{hash}}
+				{{checkArr}}
+			</ul>
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>
+			//项目需求
+			//1.当在输入框输入数据,按enter键之后,将该数据插入进来
+			//2.当该条数据前面的多选框选中的话,就表示该任务完成,该数据显示为删除状态//解决办法给他添加一个类
+			//3.将数据保存到localStorage中去,封装一个函数
+			
+			
+			var storage = {
+				set(uname,value){
+//					var value = JSON.stringify(value)
+					localStorage.setItem(uname,JSON.stringify(value))
+				},
+				get(uname){
+					//这里进行无数据时的bug处理,
+//					var getvalue = localStorage.getItem(uname) || []
+					return JSON.parse(localStorage.getItem(uname) || []) ;
+				}
+			}
+			
+			//测试数据
+			var testData = [
+				{
+					uname:'angular挺不错',
+					ischeck:false,
+				},
+				{
+					uname:'Vue趋势太强了',
+					ischeck:false,
+				},{
+					uname:'React功能挺强大',
+					ischeck:false,
+				},
+			]
+			//验证通过,设置,获取成功
+			storage.set('arr',testData);
+			
+//			console.log(storage.get('aaaa'))
+			//设置初始化原始静态数据
+			
+			//在localStorage中获取相关数据
+			var arr = storage.get('arr')
+			
+			//实例化及配置vue对象
+			var vm = new Vue({
+				//vue的作用范围
+				el:'#app',
+				//数据
+				data:{
+					arr,   //实际上应该是 arr:arr,在es6中可以简写
+					addD:'',
+					hash:'all',
+				},
+				//计算属性//根据不同的条件该变量有不同的值//变量后面是一个函数,可以进行相关判断
+				computed:{
+					sumNoCom:function(){
+						//这个一个获取函数,需要返回值得
+						return this.arr.filter(function(val,index){
+							return val.ischeck === false;
+						}).length;
+					},
+					checkArr:function(){
+						if(this.hash == 'all'){
+							return this.arr
+						}else if(this.hash == 'notest'){
+							return this.arr.filter(function(value){
+								return value.ischeck == false
+							})
+						}else if(this.hash == 'dotest'){
+							return this.arr.filter(function(value){
+								return value.ischeck == true
+							})
+						}else{
+							return this.arr
+						}
+					}
+					
+				
+				},
+				//函数
+				methods:{
+					//添加数据函数
+					addData:function(){
+						this.arr.unshift({
+							uname:this.addD,
+							ischeck:false,
+						});
+						//当数据添加完毕之后,将数据清空
+						this.addD = '';
+					},
+					//删除数据函数
+					delData(index){
+						//将index序列的数据从数组中删除
+						this.arr.splice(index,1)
+					},
+					//改变该条数据的内部是否选中的值
+					boxIsCheck(index){
+						this.arr[index].ischeck = !this.arr[index].ischeck;
+					}
+					
+				},
+				//自定义指令
+				directives:{
+					
+				},
+				//监听数据
+				watch:{
+					
+				}
+			})
+			
+			//当页面加载的时候,就获取一次hash值
+			function getHash(){
+				//当hash值改变的时候,获取哈希值
+				vm.hash = window.location.hash.slice(1)
+			}
+			getHash()
+			window.addEventListener('hashchange',getHash)
+			
+			
+			
+		</script>
+	</body>
+</html>
+
+
+

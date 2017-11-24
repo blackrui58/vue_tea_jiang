@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="index.css"/>
+		<style>
+			.del{
+				text-decoration: line-through;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h3>添加任务:</h3>
+			<input class="ip" type="text" v-model="msg" @keyup.enter="add" placeholder="提示:回车即可添加任务" />
+			<div class="state">
+				<div class="left" style="color:#ffa500;">{{sum111}}个任务未完成</div>
+				<ul class="right">
+					<li class="on" @click='alltest'>所有任务</li>
+					<li @click='notest'>未完成的任务</li>
+					<li @click='dotest'>完成的任务</li>
+				</ul>
+			</div>
+			<h3 style="margin-top:10px;">任务列表:</h3>
+			<!--//任务列表	任务列表任务列表任务列表-->	
+			<ul class="task">
+				<li v-for="(item,index) in arrcheck" class="normal">
+					<div v-if="selectedDiv != index" class="normal" @dblclick="edit(index,item)">
+						<input type="checkbox"  :checked="item.ischeck" @click='toChecked(item)' checked="true"/>						
+						<strong :class={del:item.ischeck}>{{item.uname}}</strong>
+						
+						<button v-on:click="del(item)" :disabled="item.ischeck">删除</button>
+					</div>
+					
+					
+					<div class="editing" v-if="selectedDiv == index">
+						<input type="text"  v-model="item.uname" @keydown.enter='editClose' @blur='editClose' class="ip"/>
+					</div>					
+				</li>
+			</ul>
+			
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>
+	
+			var arr = [{
+				uname:'angular不错',
+				ischeck:false,
+			},{
+				uname:'vue也不错',
+				ischeck:false,
+			}];
+			
+			var arrcheck = [];
+			
+			
+			var vm =new Vue({
+				
+				el:'#app',
+				data:{
+					msg:'',
+					arr,
+					isShow:false,
+					selectedDiv:-1,
+					arrcheck:arr,
+				},
+				computed:{
+					sum111(){
+						return this.arr.filter(function(value){
+							return value.ischeck == false;
+						}).length
+					},
+//					arrcheck(){
+//						return this.arr;
+//					}
+				},
+				methods:{
+					add(){
+						if( this.msg !== ''){
+							this.arr.push({uname:this.msg,ischeck:false})
+						}						
+						this.msg = ''
+						console.log(arr)
+					},
+					del(item){
+						//index为点击该元素的数组下标
+//						arr.splice(index,1)
+						console.log(item);
+						var index = this.arr.indexOf(item)
+						arr.splice(index,1)
+						
+					},
+					edit(index,item){
+						if(item.ischeck == false){
+							this.selectedDiv = index;
+						}
+						//如果仅仅写下面的代码,那所有的编辑状态都会打开
+//						this.isShow = true;
+						//这里的需求是,仅仅让双击的该标签发生相应的转换
+						//将选择的标签的下标赋给某个变量
+					
+						
+						//html的for循环中,通过将循环标签的下标于该变量进行匹配,从而达到对特定元素的操作
+						
+						
+					},
+					editClose(){
+						//当编辑状态关闭的时候,就设置选择的该元素下标为-1,从而不和任何元素匹配
+						this.selectedDiv = -1;
+						
+					},
+					toChecked(item){
+						item.ischeck = !item.ischeck
+						
+						//循环遍历数据数组,找出选中状态的数组
+						arrcheck = this.arr.filter(function(value,index){
+							return value.ischeck == true;
+						})		
+
+					},
+					alltest(){
+						this.arrcheck = this.arr;
+					},
+					notest(){
+						console.log('no')
+						this.arrcheck =  this.arr.filter(function(value,index){
+							
+							console.log(value.ischeck,typeof value.ischeck);
+							return value.ischeck == true;
+						})					
+					},
+					dotest(){
+						this.arrcheck =  this.arr.filter(function(value,index){
+							return value.ischeck == false;
+						})
+						
+					}
+				}
+				
+			})
+			
+		</script>
+	</body>
+</html>
+
+
+

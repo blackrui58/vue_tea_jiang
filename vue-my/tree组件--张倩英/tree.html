@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul,li{list-style:none;}
+			.jiantou{transform:rotate(90deg)}
+			.icon{
+				background:url(右箭头.png) no-repeat center;
+				float:left;
+				width:14px;
+				height:14px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<tree :tree-list="treeList" :is-right="true" :is-down="false">
+				
+			</tree>
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>
+			var treeList = [
+					{
+						index:'目录',
+						flag:false,
+						children:[{
+							index:'我的目录',
+							flag:false,
+						},{
+							index:'我的目录2',
+							flag:false,
+						}]
+					},
+					{
+						index:'我的音乐',
+						flag:false,
+						children:[{
+							index:'周杰伦',
+							flag:false,
+							children:[{
+								index:'发如雪',
+								flag:false,
+							},{
+								index:'彩虹',
+								flag:false,
+							}]
+						},{
+							index:'王杰',
+							flag:false,
+							children:[{
+								index:'一场游戏一场梦',
+								flag:false,
+							}]
+						}]
+					},
+					{
+						index:'我的照片',
+						flag:false,
+						children:[{
+								index:'我的照片',
+								flag:false,
+							}]
+					}
+					];
+			Vue.component('tree', {
+				template: `<div>
+					<ul >
+					
+						<li v-for="item in treeList">
+							<i class="icon" @click="down(item)"  :class="{jiantou:item.flag}"></i>
+							{{item.index}}
+							<tree :tree-list="item.children" v-show="item.flag"></tree>
+						</li>
+					</ul>
+					
+				</div>`,
+				props: {
+					treeList:{
+						type:Array,
+						default: function () {
+							return [];
+						}
+					},
+					
+				},
+				methods: {
+					down(item){
+						item.flag = !item.flag;
+						
+					}
+				},
+				
+				
+			});
+			
+			 
+			new Vue({
+				el: '#app',
+				data: {
+					treeList,
+				},
+				
+			});
+		</script>
+	</body>
+</html>

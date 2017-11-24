@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			
+			<input type="text" v-model="inputM" />
+			<p v-show = "pif">PPP</p>
+			{{inputM}}
+			<div v-for="(item, index) in stus">
+				{{index + 1}}: 姓名： {{item.uname}} || 年龄： {{item.age}}
+			</div>
+		</div>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			
+			var stus = [{
+				uname: 'aaa',
+				age: 20
+			},{
+				uname: 'bbb',
+				age: 22
+			},{
+				uname: 'ccc',
+				age: 23
+			},{
+				uname: 'ddd',
+				age: 25
+			},{
+				uname: '222',
+				age: 22
+			}];
+			
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					pif: false,
+					inputM: "aaa",
+					stus
+				}
+			});
+		</script>
+	</body>
+</html>

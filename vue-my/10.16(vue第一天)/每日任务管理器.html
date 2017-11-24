@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>每日任务管理器</title>
+		<style>
+			body{background: #f4f4f4;}
+			*{list-style: none;}
+			#app {
+				width: 980px;
+				margin: 0 auto;
+			}
+			
+			h3 {
+				height: 43px;
+				margin: 0 auto;
+			}
+			
+			.ip {
+				width: 980px;
+				height: 43px;
+				padding-left: 3px;
+				margin: 0 auto;
+				display: block;
+			}
+			
+			ul.task {
+				width: 980px;
+				margin: 0 auto;
+				font-size: 16px;
+				padding:0;
+			}
+			
+			.task li {
+				padding: 5px;
+				list-style: none;
+				border-bottom: 1px solid #ccc;
+			}
+			
+			.task li span {
+				background: #d9534f;
+				cursor: pointer;
+				display: inline-block;
+				width: 70px;
+				height: 25px;
+				color: #fff;
+				float: right;
+				font-size: 16px;
+				text-align: center;
+				line-height: 25px;
+			}
+			
+			.task li em {
+				font-style: normal
+			}
+			
+			.state{
+				margin:30px 10px;overflow: hidden;
+			}
+			.state .left{float:left}
+			.state ul{float:right}
+			.state li{float:left;padding:5px 15px;}
+			.state li.on{border:1px solid #ccc;}
+			.footer{margin-top:20px;}
+			.finish{color:#555;text-decoration:line-through;}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<h3>添加任务:</h3>
+			<input class="ip" type="text" v-model="newTask" @keyup.enter="addTask" placeholder="提示:回车即可添加任务" />
+			<div class="state">
+				<div class="left" style="color:#ffa500;">{{num}}个任务未完成</div>
+				<ul class="right">
+					<li class="on">所有任务</li>
+					<li>未完成的任务</li>
+					<li>完成的任务</li>
+				</ul>
+			</div>
+			<h3 style="margin-top:10px;">任务列表:</h3>
+			
+			
+			
+			<ul class="task">
+				<li v-for="item in tasks">
+					<div class="normal" v-if="editingItem !== item">
+						<input type="checkbox" v-model="item.check" @click="changeNum(item)"/>{{item.check}}
+						<em @dblclick="editTask(item)" :class="{finish:item.check}">{{item.name}}</em>
+						<span @click="delTask(item)">删除</span>
+					</div>
+					<div class="editing" v-if="editingItem === item">
+						<input class="ip" type="text" v-model="item.name" @keyup.enter="editOk" @keyup.esc="cancel(item)" @blur="editOk" placeholder="提示:回车即可完成编辑" />
+					</div>
+				</li>
+			</ul>
+			<div class="footer" style="color:#999">温馨小提示:双击可以编辑任务,按esc取消编辑,回车保存编辑</div>
+		</div>
+		<script src="vue.js"></script>
+		<script src="app.js"></script>
+	</body>
+
+</html>

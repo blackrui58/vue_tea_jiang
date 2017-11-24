@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<body>
+		
+		<div id="app">
+			<post-comment :user-data = "nowUser"  @postdata = "newComment" ></post-comment>
+			<h4>默认评论</h4>
+			<comment :list-data = "commentData" @good = "goodHandler" @postdata = "newComment"   @bad = "badHandler"  :userinfo = "nowUser" reply-title = "我要点评"></comment>
+		</div>
+		
+		
+		
+		<script src="js/vue.js"></script>
+		<script src = "js/json.js"></script>
+		<script src = "js/post.js"></script>
+		<script src="js/comment-item.js"></script>
+		<script src="js/comment.js"></script>
+		<script>
+
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					commentData,
+					nowUser
+				},
+				methods:{
+					newComment(v){
+						this.commentData.unshift(v);
+					},
+					goodHandler(i){
+						this.commentData[i].good++;
+					},
+					badHandler(i){
+						this.commentData[i].bad++;
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

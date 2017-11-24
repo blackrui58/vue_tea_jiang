@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src = "../vue.js"></script>
+	</head>
+	<body>
+		
+		<div id = "demo"></div>
+		<script type = "x-template" id = "temp">
+			<div>
+				字符串模版（替换原有DOM）, 
+				{{message}}
+			</div>
+		</script>
+		<script>
+			var demoData = {
+				message: "字符串模版也可以正常加表达式"
+			};
+			var vue = new Vue({
+				el:"#demo",
+				data: demoData,
+				template:"#temp"
+			});
+		</script>
+	</body>
+</html>

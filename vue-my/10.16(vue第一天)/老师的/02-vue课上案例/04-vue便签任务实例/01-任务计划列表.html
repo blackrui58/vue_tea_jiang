@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>工作任务表</title>
+	<link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+
+	<div class="main">
+		<h3>添加任务： </h3>
+		
+		<input  class = "newPlan" type="text" placeholder = "例如：学习Vue； 提示：＋回车即可添加任务" v-on:keyup.enter="addTodo(123,$event)" v-model = "newTodo" >
+		
+		<ul class = "all-status" v-show = "list.length">
+			<li class="status">
+			{{noCheckedLength}}个任务未完成</li>
+			<li class = "filters">
+				<a href="#all" :class = "{active:this.visibility != 'unfinished' && this.visibility != 'finished'}">所有任务</a>
+				<a href="#unfinished" :class = "{active:this.visibility == 'unfinished'}">未完成的任务</a>
+				<a href="#finished" :class = "{active:this.visibility == 'finished'}">完成的任务</a>
+			</li>
+		</ul>
+
+		<h3>任务列表：</h3>
+		<div class="tasks">
+			
+			<span v-show = "!filterList.length" class="no-task-tip">无任何任务</span>
+			<ul class="todo-list">
+				<li class="todo" :class = "{completed:item.isChecked,editing:item === editItem}" v-for = "item in filterList">
+					<div class="view" >
+						<input class="toggle" v-model = "item.isChecked" type="checkbox">
+						<label @dblclick  = "edit(item)" >{{item.title}}</label>
+						<button class="destroy" v-on:click = "deletePlan(item)">删除任务</button>
+					</div>
+					<input type="text" v-focus = "editItem === item" class="edit" v-model = "item.title" @blur = "editorOk" @keyup.enter = "editorOk" @keyup.esc = "cancelEdit(item)">
+				</li>
+			</ul>
+			<span class = "tip" v-show = "filterList.length" >温馨小提示，双击可以编辑任务，按esc取消编辑，回车保存编辑。</span>
+		</div>
+
+	</div>
+	<script src = "vue.js"></script>
+	<script src = "app.js"></script>
+</body>
+</html>

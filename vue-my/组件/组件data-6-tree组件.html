@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<trees :arr2='arr1'></trees>
+		</div>
+		
+		<!--
+		<ul>
+			<li v-for="a in item.children">
+				{{a.name}}
+			</li>
+		</ul>
+		-->
+	</body>
+	<script type="text/javascript" src='vue.js'></script>
+	<script type="text/javascript">
+	
+		//定义全局组件
+		Vue.component('trees',{
+			template:`
+				<div >
+					<ul>
+						<li v-for="item in arr3">
+							{{item.name}}
+							
+							
+							<trees :arr2='item.children'></trees>
+							
+						</li>
+					</ul>
+				</div>
+			`,
+			data:function(){
+				return{
+					arr3:this.arr2,
+				}
+			},
+			computed:{
+//				arr3:arr2,
+			},
+			props:{
+				arr2:{
+					type:Array,
+					default:function(){
+						return []
+					}
+				}
+			}
+		})
+		var arr = [
+			{
+				name:'一级111',
+				children:[
+					{
+						name:'二级111',
+						children:[
+							{
+								name:'san级111'
+							},
+							{
+								name:'san级111'
+							},
+							{
+								name:'san级111'
+							}
+						]
+					},
+					{
+						name:'二级111'
+					},
+					{
+						name:'二级111'
+					}
+				]
+			},
+			{
+				name:'一级222',
+				children:[
+					{
+						name:'二级222'
+					},
+					{
+						name:'二级222'
+					},
+					{
+						name:'二级222'
+					}
+				]
+			},
+			{
+				name:'一级333',
+				children:[
+					{
+						name:'二级333'
+					},
+					{
+						name:'二级333'
+					},
+					{
+						name:'二级444'
+					}
+				]
+			},
+		]
+		
+		//实例化vue对象
+		new Vue({
+			el:'#app',
+			data:{
+				arr1:arr,
+			}
+		})
+	</script>
+</html>

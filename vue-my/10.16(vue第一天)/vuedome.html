@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			[v-cloak] {
+			  display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h1 v-cloak>{{a}}</h1>
+			
+			<div v-once v-cloak>
+				{{b}}
+			</div>
+			<p v-if="has">youyouyou</p>
+			<p v-else>相反</p>
+			<h1 v-show="has">一级标题</h1>
+			<input type="text" v-model="mod">
+			<h2>{{mod}}</h2>
+			<div>
+				<h6 v-for="(item,index) in arr">
+					{{index}} ||	{{item.name}} || {{item.age}}
+				</h6>
+			</div>
+			
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>
+			var arr = [
+				{name:'a',age:'18'},
+				{name:'b',age:'19'},
+				{name:'c',age:'14'},
+				{name:'d',age:'16'}
+					
+				]
+			var vm =new Vue({
+				
+				el:'#app',
+				data:{
+					a:'nnmmmmmmm',
+					b:'eeeeeeeeee',
+					has:true,
+					mod:'',
+					arr,
+				}
+			})
+			
+		</script>
+	</body>
+</html>

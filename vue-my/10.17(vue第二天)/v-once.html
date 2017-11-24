@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.v-leave{
+				opacity: 1;
+				transform:rotate(0deg) ;
+			}
+			.v-leave-to{
+				opacity: 0;
+				transform:rotate(30deg) ;
+				/*translateX(1000px)*/
+			}
+			.v-leave-active{
+				transition: all linear 2s;
+				
+				
+				
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<button @click="toggle">转变</button>
+			<transition>
+				<div style="width:50px;height: 50px;background: #ccc;" v-if="show">
+					
+				</div>
+			</transition>
+			
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					show:true,
+				},
+				methods:{
+					toggle(){
+						this.show = !this.show;
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>
+

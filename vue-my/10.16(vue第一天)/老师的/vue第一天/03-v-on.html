@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<input @keyup.ctrl.67="doThis" />
+
+		</div>
+		
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#app",
+				data:{
+					
+				},
+				methods:{
+					doThis(){
+						console.log(11);
+					},
+					doThat(){
+						
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

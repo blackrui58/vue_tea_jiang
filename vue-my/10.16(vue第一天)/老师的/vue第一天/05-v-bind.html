@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.classA {
+				color:white; 
+			}
+			.classB {
+				color:green; 
+			}
+			.classC {
+				color:yellow; 
+			}
+			.aaa{
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			isRed: <input type="checkbox" name="" id="" v-model = "isRed" />
+			isB: <input type="checkbox" name="" id="" v-model = "isB" />
+			isC: <input type="checkbox" name="" id="" v-model = "isC" />
+			<div  :class="[classA, { classB: isB, classC: isC }]">
+				adfadsfadf
+			</div>
+			
+			
+			<div :style="{ fontSize: size + 'px' }">
+				adfadfadfadf
+			</div>
+			
+			<!-- 自定义属性 -->
+			<div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
+			
+			<div :style="[styleObjectA, styleObjectB]"></div>
+
+		</div>
+		
+		
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		
+	
+		
+		
+		<script type="text/javascript">
+			
+			var vm = new Vue({
+				el: "#app",
+				data:{
+					isRed: true,
+					isB:true,
+					isC:true,
+					classA: 'aaa',
+					size:100,
+					someProp : 12435,
+					otherProp:'abceed'
+					
+				}
+			});
+		</script>
+	</body>
+</html>

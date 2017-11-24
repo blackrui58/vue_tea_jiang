@@ -1,0 +1,10 @@
+设置的props：
+modalTitle 提醒信息 默认为 '这是一个模态框'
+
+定制模板：
+slot为modal-content  定制提醒信息模板
+slot为modal-footer   定制底部模板
+
+监控子组件状态变化：
+事件名on-ok        点击确定触发
+事件名on-cancel   点击取消触发

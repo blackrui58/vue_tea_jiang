@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{name}}</h1>
+			<button @click='change'>更改</button>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="vue.js"></script>
+<script>
+	var vm = new Vue({
+		el:'#app',
+		data:{
+			name:'jiahui'
+		},
+		methods:{
+			eat(){
+				console.log('吃饭了')
+			},
+			change(){
+				this.name='cc'
+			}
+		},
+		beforeCreate(){
+			console.log('beforeCreate之前################')
+			console.log(this.name);
+			console.log(this.eat)
+			this.eat()
+			console.log('beforeCreate之后.....................')
+		},
+		created(){
+			console.log('created之前################')
+			console.log(this.name);
+			console.log(this.eat)
+			this.eat()
+			console.log('created之后.......................')
+		},
+		beforeMount(){
+			console.log('beforeMount之前################')
+			console.log(this.name);
+			console.log(this.eat)
+			this.eat()
+			console.log('beforeMount之后.......................')
+		},
+		mounted(){
+			console.log('mounted之前################')
+			console.log(this.name);
+			console.log(this.eat)
+			this.eat()
+			console.log('mounted之后.......................')
+		},
+		beforeUpdate(){
+			console.log('beforeUpdate之前################')
+			console.log(this.name);
+			console.log(this.eat)
+			this.eat()
+			console.log('beforeUpdate之后.......................')
+		},
+		updated(){
+			console.log('updated之前################')
+			console.log(this.name);
+			console.log(this.eat)
+			this.eat()
+			console.log('updated之后.......................')
+		},
+		beforeDestroy(){
+			console.log('beforeDestroy之前################')
+			console.log(this.name);
+			console.log(this.eat)
+			this.eat()
+			console.log('beforeDestroy之后.......................')
+		},
+		detroyed(){
+			console.log('detroyed之前################')
+			console.log(this.name);
+			console.log(this.eat)
+			this.eat()
+			console.log(vm.$el)
+			console.log('detroyed之后.......................')
+		}
+	})
+</script>

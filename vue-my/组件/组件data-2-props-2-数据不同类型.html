@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="app">
+			<!--<my-component :test="class74"></my-component>-->
+			<my-component  ></my-component>
+		</div>
+		
+	
+	</body>
+	
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		Vue.component('my-component',{
+			name:'my-component',
+			template:`
+				<div>
+					<h1>我们的世界  {{msg}}</h1>
+					<input type="checkbox" v-model="ischeck"/>
+					<p v-if="ischeck">是否显示的测试数据</p>
+					<div>{{test}}</div>
+					<ul>
+						<li v-for="item in test">姓名:{{item.name}} || 年龄:{{item.age}}</li>
+					</ul>
+					
+				</div>
+				
+				`,
+			data:function(){
+				return{
+					msg:'组件测试信息',
+					ischeck:true,
+				}
+			},
+			props:{
+				test: {
+					type:Array,
+					default:function(){
+						return [
+							{
+								name:'guorui',
+								age:20,
+							}
+						]
+						
+					}
+				}
+			}
+			
+		})
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				class74:[
+					{
+						name:'aaaaa',
+						age:11111,
+					},
+					{
+						name:'bbbbb',
+						age:22222,
+					},
+					{
+						name:'ccccc',
+						age:33333,
+					},
+					
+				],
+				
+//				class378:[
+//					{
+//						name:'jiahui',
+//						age:18,
+//					},
+//					{
+//						name:'nana',
+//						age:14,
+//					},
+//					{
+//						name:'chuanchuan',
+//						age:16,
+//					},
+//					
+//				],
+			},
+		})
+		
+	
+	</script>
+</html>

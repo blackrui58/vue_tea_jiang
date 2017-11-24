@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h1>添加任务</h1>
+			<input type="text" v-model="msg" @keyup.enter="add"/>	
+			
+			
+			<ul >
+				<li v-for="(item,index) in arr">
+					<div v-if="" class="normal">
+						<input type="checkbox" />
+						<strong>{{item.uname}}</strong>					
+						<button v-on:click="del(item)">删除</button>
+					</div>
+					<div class="edit" v-if="">
+						
+					</div>
+					
+					
+				</li>
+			</ul>
+			
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>
+	
+			var arr = [{
+				uname:'angular不错',
+			},{
+				uname:'vue也不错',
+			}];
+			
+			var vm =new Vue({
+				
+				el:'#app',
+				data:{
+					msg:'',
+					arr,
+				},
+				methods:{
+					add(){
+						if( this.msg !== ''){
+							arr.push({uname:this.msg})
+						}						
+						this.msg = ''
+					},
+					del(item){
+						//index为点击该元素的数组下标
+//						arr.splice(index,1)
+						console.log(item);
+						var index = this.arr.indexOf(item)
+						arr.splice(index,1)
+						
+					}
+				},
+				computed:{
+					
+				}
+				
+			})
+			
+		</script>
+	</body>
+</html>
+

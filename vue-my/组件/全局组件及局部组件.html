@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="app">
+			<my-component></my-component>
+			<my-com></my-com>
+		</div>
+		
+		<hr>
+		
+		<div id="app1">
+			<my-component></my-component>
+			<my-com></my-com>
+		</div>
+	</body>
+	
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		//这种定义的为全局的组件 ----还可以定义私有的组件,就是仅仅能在一个实例范围内使用
+		Vue.component('my-component',{
+			name:'my-component',
+			template:`<h1>我们的世界</h1>`
+		})
+		var vm = new Vue({
+			el:'#app',
+			components:{
+				'my-com':{
+					template:`<strong>局部组件</strong>`
+				}
+			}
+		})
+		
+		var vm = new Vue({
+			el:'#app1'
+		})
+	</script>
+</html>

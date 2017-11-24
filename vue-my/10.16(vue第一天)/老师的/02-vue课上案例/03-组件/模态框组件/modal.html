@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="modal.css" />
+	</head>
+	<body>
+		<div id = "app">
+			<modal @ok-click = "modalOk" @cancel-click = "modalCancel"></modal>
+			<modal modal-title = "提醒">
+				<ul slot = "modal-content">
+					<li v-for = "item in list">{{item}}</li>
+				</ul>
+				<div slot = "modal-footer">
+					<span>确定</span>
+					<span>取消</span>
+					<span>重置</span>
+				</div>
+			</modal>
+		</div>
+		
+		
+		
+		<script src="../../vue.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			Vue.component("modal",{
+				props:{
+					modalTitle:{
+						type:String,
+						default: "这是标题"
+					}
+				},
+				template:`
+				<div class="modal">
+					<div class="modal-header">
+						<h4>{{modalTitle}}</h4>
+					</div>
+					<div class="modal-content">
+						<div>
+							<slot name = "modal-content">在这里添加内容</slot>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<slot name = "modal-footer">
+							<input class="btn blue" type="button" @click = "onOk" value="确定" />
+							<input class="btn" type="button" @click = "onCancel" value="取消" />
+						</slot>
+					</div>
+				</div>
+				`,
+				methods:{
+					onOk: function(){
+						this.$emit("ok-click");
+					},
+					onCancel:function(){
+						this.$emit("cancel-click");
+					}
+				}
+			});
+			
+			var list = [...'AAA教育'];
+			
+			var vm = new Vue({
+				el: "#app",
+				data:{
+					list: list
+				},
+				methods:{
+					modalOk: function(){
+						alert("ok click");
+					},
+					modalCancel:function(){
+						alert("cancel click");
+					}
+				}
+				
+			});
+		</script>
+	</body>
+</html>

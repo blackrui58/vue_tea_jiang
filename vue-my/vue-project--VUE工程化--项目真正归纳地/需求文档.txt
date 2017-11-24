@@ -1,0 +1,51 @@
+- 登录页面： /login
+- 框架页面： 
+	-  后台默认的首页:  /dashboard
+	-  用户中心 /user
+		-  用户列表： /user/list
+		-  修改个人信息 /user/profile
+		-  修改密码： /user/changepwd
+	- 文章管理中心： /article
+		- 文章列表： /article/list
+		- 文章分类： /article/category
+
+
+
+
+
+## ElementUI 
+- 安装及起步：
+	- npm i element-ui -S 
+	- main.js中添加 ElementUI插件
+		- import ElementUI from 'element-ui'
+		- import 'element-ui/lib/theme-default/index.css'
+		- Vue.use(ElementUI)
+
+
+
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      component: Frame,
+      redirect: '/dashboard',
+      children:[
+      	{
+      		path:'dashboard',
+      		component:Dashboard,
+      		name: '首页'
+      	},
+      	{
+      		path:'user',
+      		component: User,
+      		children:[{
+      			path: 'list',
+      			component: UserList
+      		}],
+      		name: '用户中心'
+      	}
+      ]
+    }
+  ],
+  mode:'history'
+})

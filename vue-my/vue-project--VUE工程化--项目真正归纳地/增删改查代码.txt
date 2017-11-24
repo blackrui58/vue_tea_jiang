@@ -1,0 +1,208 @@
+在ArticleList页面
+	- 分页组件： 
+		- :page-size ： 每页显示多少条
+		- ：total ： 总条数
+		- @current-change ： 当前页数发生变化时，触发的回调 
+
+
+
+//删除
+	      delBook: function (index, row) {
+	      	
+	        this.$confirm('确认删除该记录吗?', '提示', {type: 'warning'}).then(() => {
+	          this.listLoading = true;
+	         
+	          let para = {id: row.id};
+	          axios.get('/book/delete',{params: para}).then((res) => {
+	            
+	            this.$message({
+	              message: '删除成功',
+	              type: 'success'
+	            });
+	            this.getBooks();
+	            this.listLoading = false;
+	          });
+	        }).catch(() => {
+	        });
+	      },
+
+
+
+   // 删除用户
+	    mock.onGet('/book/delete').reply(config => {
+	    
+	      let {id} = config.params;
+	      
+	      _Books = _Books.filter(b => b.id !== id);
+	      return new Promise((resolve, reject) => {
+	        setTimeout(() => {
+	          resolve([200, {
+	            code: 200,
+	            msg: '删除成功'
+	          }])
+	        }, 500)
+	      })
+	    })
+
+
+//新增
+	      addSubmit: function () {
+	        this.$refs.addForm.validate((valid) => {
+	          if (valid) {
+	            this.addLoading = true;
+				console.log(this.addForm);
+	            let para = Object.assign({}, this.addForm);
+	            console.log(para);
+	            para.publishAt = (!para.publishAt || para.publishAt == '') ? '' : util.formatDate.format(new Date(para.publishAt), 'yyyy-MM-dd');
+	            axios.get('/book/add',{params: para}).then((res) => {
+	              this.addLoading = false;
+	              this.$message({
+	                message: '提交成功',
+	                type: 'success'
+	              });
+	              this.$refs['addForm'].resetFields();
+	              this.addFormVisible = false;
+	              this.getBooks();
+	            });
+	          }
+	        });
+	      },
+
+
+
+ // 新增图书
+	    mock.onGet('/book/add').reply(config => {
+	    	let {
+	    		name,
+	    		author,
+	    		description,
+	    		publishAt
+	    	} = config.params
+	    	//console.log(config.params)
+	    	_Books.unshift({
+	    		name: name,
+	    		author: author,
+	    		description: description,
+	    		publishAt: publishAt
+	    	})
+	    	return new Promise((resolve, reject) => {
+	    		setTimeout(() => {
+	    			resolve([200, {
+	    				code: 200,
+	    				msg: '新增成功'
+	    			}])
+	    		}, 500)
+	    	})
+	    });
+
+
+ //编辑
+	      editSubmit: function () {
+	        this.$refs.editForm.validate((valid) => {
+	          if (valid) {
+	            this.$confirm('确认提交吗？', '提示', {}).then(() => {
+	              this.editLoading = true;
+	              //NProgress.start();
+	              let para = Object.assign({}, this.editForm);
+	              console.log(para.publishAt);
+	              para.publishAt = (!para.publishAt || para.publishAt == '') ? '' : util.formatDate.format(new Date(para.publishAt), 'yyyy-MM-dd');
+	              axios.get('/book/edit',{params: para}).then((res) => {
+	                this.editLoading = false;
+	                this.$message({
+	                  message: '提交成功',
+	                  type: 'success'
+	                });
+	                this.$refs['editForm'].resetFields();
+	                this.editFormVisible = false;
+	                this.getBooks();
+	              });
+	            });
+	          }
+	        });
+	      },
+
+
+
+// 编辑图书
+	    mock.onGet('/book/edit').reply(config => {
+	    	let {
+	    		id,
+	    		name,
+	    		author,
+	    		description,
+	    		publishAt
+	    	} = config.params
+	    	_Books.some(u => {
+	    		if(u.id === id) {
+	    			u.name = name
+	    			u.author = author
+	    			u.description = description
+	    			u.publishAt = publishAt
+	    			return true
+	    		}
+	    	})
+	    
+	    	return new Promise((resolve, reject) => {
+	    		setTimeout(() => {
+	    			resolve([200, {
+	    				code: 200,
+	    				msg: '编辑成功'
+	    			}])
+	    		}, 500)
+	    	})
+	    });
+
+
+selsChange: function (sels) {
+
+	        this.sels = sels;
+	      },
+
+
+
+
+//批量删除
+	      batchDeleteBook: function () {
+	        var ids = this.sels.map(item => item.id).toString();
+	        console.log(ids);
+	        this.$confirm('确认删除选中记录吗？', '提示', {
+	          type: 'warning'
+	        }).then(() => {
+	          this.listLoading = true;
+	          
+	          let para = {ids: ids};
+	          axios.get('/book/batchdelete',{params: para}).then((res) => {
+	            this.listLoading = false;
+	            this.$message({
+	              message: '删除成功',
+	              type: 'success'
+	            });
+	            this.getBooks();
+	          });
+	        }).catch(() => {
+	
+	        });
+	      }
+
+
+
+// 批量删除图书
+	    mock.onGet('/book/batchdelete').reply(config => {
+	    	let {
+	    		ids
+	    	} = config.params
+	    	ids = ids.split(',')
+	    	_Books = _Books.filter(u => !ids.includes(u.id))
+	    	return new Promise((resolve, reject) => {
+	    		setTimeout(() => {
+	    			resolve([200, {
+	    				code: 200,
+	    				msg: '删除成功'
+	    			}])
+	    		}, 500)
+	    	})
+	    });
+
+
+
+

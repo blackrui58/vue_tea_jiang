@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<a1></a1>
+			<a2>
+				<!--{{msg}}-->
+			</a2>
+		</div>
+	</body>
+	<script type="text/javascript" src='vue.js'>
+		
+	</script>
+	<script type="text/javascript">
+		var Bus = new Vue();
+		Vue.component('a1',{
+			template:`<div>
+					c1
+					<button @click = "fclick">c1</button>
+				
+				</div>`,
+			methods:{
+				fclick:function(){
+					Bus.$emit('fclick',1111)
+				}
+			}
+		})
+		Vue.component('a2',{
+			template:`<div>
+					c1
+					
+				
+				</div>`,
+//			data:function(){
+//				return{
+//					msg:'a2的信息'
+//				}
+//			}
+			mounted:function(){
+				Bus.$on('fclick',function(val){
+					console.log('这里监听成功了,'+val)
+				})
+			}
+			
+		})
+		var vm = new Vue({
+			el:'#app'
+		})
+	</script>
+</html>

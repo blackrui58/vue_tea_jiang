@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<h1 v-text="msg"></h1>
+			<div >{{hh}}</div>
+			<div v-html="hh"></div>
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>
+			var arr = [
+				{name:'a',age:'18'},
+				{name:'b',age:'19'},
+				{name:'c',age:'14'},
+				{name:'d',age:'16'}
+					
+				]
+			var vm =new Vue({
+				
+				el:'#app',
+				data:{
+					a:'nnmmmmmmm',
+					b:'eeeeeeeeee',
+					has:true,
+					mod:'',
+					arr,
+					imgsrc:'1.jpg',
+					msg:123,
+					hh:'<h1>我们的世界</h1>'
+					
+				},
+				
+			})
+			
+		</script>
+	</body>
+</html>
+

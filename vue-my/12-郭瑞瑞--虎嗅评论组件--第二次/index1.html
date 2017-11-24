@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>虎嗅评论组件</title>
+	<link rel="stylesheet" href="css/index1.css" />
+	
+</head>
+<body>
+	<div id='app'>
+		<!--虎嗅组件模板-->
+		<div class="huxiu">	
+			<comment :users = 'users' ></comment>			
+		</div>
+	</div>
+</body>
+<!--script文件的加载,先加载最基础的    ,然后从小到大的组件文件进行加载-->
+<script src='js/vue.js'></script>
+<script src='js/data.js'></script>
+<script src='js/post_comment_component.js'></script>
+<script src='js/comment-item-component.js'></script>
+<script src='js/comment-content-component.js'></script>
+<script src='js/comment_component.js'></script>
+<script src='js/app.js'></script>
+
+</html>

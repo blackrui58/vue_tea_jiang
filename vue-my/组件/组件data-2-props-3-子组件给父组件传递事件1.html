@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="app">
+			<c1 :parentdata="pdata" @chuandidao="fujieshou"></c1>
+		</div>
+		
+	
+	</body>
+	
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		Vue.component('c1',{
+			template:`
+			<div>
+				<p>{{parentdata}}</p>
+				<button @click="zidianji">点击改变数值</button>
+			</div>
+			`,
+			data:function(){
+				return{
+					
+				}
+			},
+			props:{
+				parentdata:{
+					type:String,
+				}
+			},
+			methods:{
+				zidianji:function(){
+					this.$emit('chuandidao')
+				}
+			}
+		})
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				pdata:'好阿红啊哈 ',
+			
+			},
+			methods:{
+				fujieshou:function(){
+					this.pdata = '改变后的父值'
+				}
+			}
+		})
+		
+	
+	</script>
+</html>

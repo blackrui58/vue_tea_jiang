@@ -1,0 +1,23 @@
+
+//在钩子函数中,写相关操作
+created(){
+      bus.$on('setUserName', (text) => {
+      	console.log(text);
+        this.nicheng = text;
+      })
+    },
+
+
+
+ submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+            bus.$emit('setUserName', this.ruleForm.name);
+
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },

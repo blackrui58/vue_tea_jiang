@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="fontFace.css"/>
+		<link rel="stylesheet" type="text/css" href="alert.css"/>
+		
+	</head>
+	<body>
+		<div id = "app">
+			<alert type = "error" title = "错误了" :closeable = "false"></alert>
+			<alert type="success" title="成功了" :show-icon = "true" style = "background-color:pink; width: 400px; height:200px;"></alert>
+			<alert @close-click = "closeClick">
+				<template slot = "titleTmp">
+				<p>我是定制的提醒信息</p>
+				<p>我是定制的提醒信息</p>
+				<p>我是定制的提醒信息</p>
+				<p>我是定制的提醒信息</p>
+				<p>我是定制的提醒信息</p>
+				</template>
+				<i class="m-icon-menu" slot = "iconTmp"></i>
+			</alert>
+		</div>
+		
+		
+		<script src="../../vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			Vue.component("alert",{
+				props:{
+					type:{
+						type:String,
+						default: "info"
+					},
+					title:{
+						type:String,
+						default:"这里是提示信息"
+					},
+					closeable:{
+						type:Boolean,
+						default: true
+					},
+					showIcon:{
+						type:Boolean,
+						default:false
+					},
+					style:{
+						type:String
+					}
+				},
+				computed:{
+					classes:function(){
+						return `m-alert-${this.type}`
+					},
+					iconClass:function(){
+						return `m-icon-${this.type}`
+					}
+				},
+				template:`
+				<div class="m-alert" :class = "[classes]" style = "style">
+					<slot name = "iconTmp">
+					<i v-if = "showIcon" class="m-icon" :class = "[iconClass]"></i>
+					</slot>
+					<div class="m-content">
+						<slot name = "titleTmp">
+							<span class="m-message">{{title}}</span>
+						</slot>
+						<i v-if = "closeable" class="m-closebtn m-icon-close" @click = "closeHandle"></i>
+					</div>
+				</div>
+				`,
+				methods:{
+					closeHandle: function(){
+						this.$emit("close-click");
+					}
+				}
+			});
+			
+			new Vue({
+				el: "#app",
+				methods:{
+					closeClick(){
+						alert("点击关闭按钮");
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

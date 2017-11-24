@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>工作任务表</title>
+	<link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+
+	<div class="main">
+		<h3>添加任务： </h3>
+		
+		<input  class = "newPlan" type="text" placeholder = "例如：学习Vue； 提示：＋回车即可添加任务" />
+		
+		<ul class = "all-status" >
+			<li class="status">
+			0个任务未完成</li>
+			<li class = "filters">
+				<a class = "active">所有任务</a>
+				<a>未完成的任务</a>
+				<a>完成的任务</a>
+			</li>
+		</ul>
+
+		<h3>任务列表：</h3>
+		<div class="tasks">
+			<span class="no-task-tip">无任何任务</span>
+			<ul class="todo-list">
+				<li class="todo completed" >
+					<div class="view" >
+						<input class="toggle" type="checkbox">
+						<label>Angular学习</label>
+						<button class="destroy">删除任务</button>
+					</div>
+					<input type="text" class="edit" />
+				</li>
+				<li class="todo" >
+					<div class="view" >
+						<input class="toggle" type="checkbox">
+						<label>Vue学习</label>
+						<button class="destroy">删除任务</button>
+					</div>
+					<input type="text" class="edit" />
+				</li>
+				<li class="todo editing" >
+					<div class="view" >
+						<input class="toggle" type="checkbox">
+						<label>React学习</label>
+						<button class="destroy">删除任务</button>
+					</div>
+					<input type="text" class="edit" />
+				</li>
+			</ul>
+			<span class = "tip" >温馨小提示，双击可以编辑任务，按esc取消编辑，回车保存编辑。</span>
+		</div>
+
+	</div>
+	<script src = "vue.js"></script>
+	<script src = "app.js"></script>
+</body>
+</html>

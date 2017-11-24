@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<c1 title = "我的购物车" :list = "listCity"></c1>
+		</div>
+		
+		<script src="../vue.js"></script>
+		<script>
+			Vue.component("c1",{
+				data:function(){
+					return {
+						drop:true
+					};
+				},
+				props:[
+					"title","list"
+				],
+				template:`<div>
+				<span>{{title}}</span>
+				<ul v-show = "drop" v-for = "city in list">
+					<li>{{city}}</li>
+				</ul>	
+				</div>`
+			});
+			
+			new Vue({
+				el: "#app",
+				data:{
+					listCity: ['北京','上海','深圳']
+				}
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="app">
+			
+			<modal @no_click='no_click' @ok_click='ok_click' :head = 'header' :confirm = 'confirm' :cancel = 'cancel' >
+				<!--自定义的body数据-->
+				<!--<div slot="body">
+					<p>身体自定义的数据</p>
+					<p>身体自定义的数据</p>
+					<p>身体自定义的数据</p>
+				</div>-->
+				<div>{{default_text}}</div>
+			</modal>
+			
+			
+			
+		</div>
+		
+	
+	</body>
+	
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		//需求描述
+		//1.将住组件的数据传递给子组件
+		//2.将子组件的事件传递给父组件
+		
+		//收的作业是:模态框组件    和     相关文档;
+		//自定义模态框modal组件
+		Vue.component('modal',{
+			template:`
+			<div>
+				<!--头部-->
+				<h1>{{head}}</h1>
+				<!--身体数据,--外部传入-->
+				<!--<slot name="body"></slot>-->
+				
+				<slot></slot>
+				<!--尾部数据-->
+				<div >
+					<button @click="ok_click">{{confirm}}</button>
+					<button @click="no_click">{{cancel}}</button>
+				</div>
+			</div>
+			`,
+			methods:{
+				ok_click:function(){
+//					console.log(1)//tongguo
+					this.$emit('ok_click')
+				},
+				no_click:function(){
+//					console.log(2)//tongguo
+					this.$emit('no_click')
+				},
+			},
+			
+			props:{
+				head:{
+					type:String,
+					default:function(){
+						return '子标题'
+					},
+				},
+				confirm:{
+					type:String,
+					default:function(){
+						return '确定'
+					},
+				},
+				cancel:{
+					type:String,
+					default:function(){
+						return '取消'
+					},
+				},
+				
+			},
+		})
+		
+		//实例化vue
+		var vm = new Vue({
+			el:'#app',
+			data:{
+//				header:'子组件标题',
+//				confirm:'确定',
+//				cancel:'取消',
+				default_text:'消息主体内容',
+			},
+			methods:{
+				ok_click(){
+					console.log('点击了确定按钮')
+				},
+				no_click(){
+					console.log('点击了取消按钮')
+				}
+			}
+		})
+	</script>
+	
+	
+	
+</html>

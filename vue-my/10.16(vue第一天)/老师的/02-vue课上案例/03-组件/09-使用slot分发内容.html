@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app" >
+			<father>
+				<div slot = "s1">我是替换的内容s1</div>
+				<div slot = "s2">我是替换的内容s2</div>
+				<div>我是替换的内容</div>
+				<div slot = "s3">我是替换的内容s3</div>
+			</father>
+		</div>
+		
+		<script src="../vue.js"></script>
+		<script>
+			Vue.component("father",{
+				data:function(){
+					return {
+						
+					};
+				},
+				props:[],
+				template:`
+					<div>
+						<slot name = "s1">
+							<p>这是第1个提醒</p>
+						</slot>
+						<slot name = "s2">
+							<p>这是第2个提醒</p>
+						</slot>
+						<slot name = "s3">
+						<p>这是第3个提醒</p>
+						</slot>
+						<slot>
+						<p>这是提醒</p>
+						<p>这是提醒</p>
+						</slot>
+					</div>
+				`
+			});
+			
+			new Vue({
+				el: "#app",
+				data:{
+					
+				}
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id = "app">
+			<c1 :list = "list"></c1>
+			<button @click = "">按钮</button>
+		</div>
+		
+		<script src="vue.js"></script>
+		<script type="text/javascript">
+			
+			
+			Vue.component("c1",{
+				template:`
+					<ul>
+						<li v-for = "item in list">{{item.title}}</li>
+						
+					</ul>
+				`,
+				props:{
+					list:{
+						type:Array,
+						default:[]
+					}
+				}
+			});
+			
+			var vm = new Vue({
+				el: "#app",
+				data:{
+					list:[{
+						title:'name1',
+						subItem:[{
+							title: 'name1-1'
+						},{
+							title: 'name1-2'
+						}]
+					},
+					{
+						title:'name2',
+						subItem:[{
+							title: 'name2-1'
+						},{
+							title: 'name2-2'
+						}]
+					}]
+				}
+			});
+			
+		</script>
+	</body>
+</html>

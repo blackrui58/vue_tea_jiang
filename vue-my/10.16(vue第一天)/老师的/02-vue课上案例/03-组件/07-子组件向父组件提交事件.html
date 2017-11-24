@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app" >
+			<c1 title = "我的购物车" @receive = "parentHandler"  :list = "listCity"></c1>
+		</div>
+		
+		<script src="../vue.js"></script>
+		<script>
+			Vue.component("c1",{
+				data:function(){
+					return {
+						drop:true
+					};
+				},
+				props:[
+					"title","list"
+				],
+				template:`<div>
+				<span>{{title}}</span>
+				<ul v-show = "drop">
+					<li  v-for = "city in list" @click = "childrenClick(city)">{{city}}</li>
+				</ul>	
+				</div>`,
+				methods:{
+					childrenClick: function(item){
+						this.$emit("receive" , item);
+					}
+				}
+			});
+			
+			new Vue({
+				el: "#app",
+				data:{
+					listCity: ['北京','上海','深圳']
+				},
+				methods:{
+					parentHandler: function(value){
+						console.log("接收到了子组件的自定义事件， 值为" + value);
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

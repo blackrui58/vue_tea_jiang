@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="app">
+			<c1 >
+				<strong slot="slotname">
+					<h1>h1一级标题</h1>
+					<h2>h2一级标题</h2>
+					<h3>h3一级标题</h3>
+				</strong>
+				
+			</c1>
+		</div>
+		
+	
+	</body>
+	
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		Vue.component('c1',{
+			template:`
+			<div>
+				<slot name="slotname"></slot>
+				<p>这是模板中的文字</p>
+				
+			</div>
+			`,
+			
+		})
+		var vm = new Vue({
+			el:'#app',
+			
+		})
+		
+	
+	</script>
+</html>

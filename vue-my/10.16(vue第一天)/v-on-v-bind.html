@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.aaa{
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<input type="button" v-on:click="add" />
+			<input type="button" @click="add" />
+			<input type="text" @keyup.ctrl.65="add" value="按shift才执行"/>
+			<input type="text" v-model="imgsrc"/>
+			<img  v-bind:src="imgsrc"/>
+			<input type="text" v-model="imgsrc"/>
+			<input type="text" :value="imgsrc"/>
+			
+			
+			
+			<div v-bind:class="aaa:true">背景色测试</div>
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>
+			var arr = [
+				{name:'a',age:'18'},
+				{name:'b',age:'19'},
+				{name:'c',age:'14'},
+				{name:'d',age:'16'}
+					
+				]
+			var vm =new Vue({
+				
+				el:'#app',
+				data:{
+					a:'nnmmmmmmm',
+					b:'eeeeeeeeee',
+					has:true,
+					mod:'',
+					arr,
+					imgsrc:'1.jpg',
+					
+				},
+				methods:{
+					add(){
+						console.log(1)
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>

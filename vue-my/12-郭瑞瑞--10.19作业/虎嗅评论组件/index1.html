@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>虎嗅评论组件</title>
+	<link rel="stylesheet" href="css/index1.css" />
+	
+</head>
+<body>
+	<div id='app'>
+		<!--虎嗅组件模板-->
+		<div class="huxiu">	
+			<comment :users = 'users' @post_data='post_data'></comment>			
+		</div>
+	</div>
+</body>
+<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/post_comment_component.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/comment_component.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">	
+	//实例化VUE
+	var vm = new Vue({
+		el:'#app',
+		data:{
+			users,
+		},
+		computed:{
+			
+		},
+		methods:{
+			post_data:function(textarea_content){
+//				console.log(textarea_content)//数据从子组件传递过来验证通过
+				var obj = {
+					name:'Alex',
+					content:`${textarea_content}`	
+				}
+//				console.log(obj)//数据验证通过
+				//将该obj数据--插入到数组中
+				this.users.unshift(obj)
+				console.log(this.users)
+			}
+		}
+		
+	})
+</script>
+</html>

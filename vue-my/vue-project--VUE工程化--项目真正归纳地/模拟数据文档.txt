@@ -1,0 +1,51 @@
+## 后台管理系统功能实现
+- 登录功能： 
+	- 记录用户信息 
+		- 表单验证（自己搞定）
+		- 把当前登录用户的信息保存到sessionStorage中。
+		- 跳转到登录后的首页. 
+- 检查跳转到某个网址的页面时，是否需要登录
+	- 导航守卫（全局的, 单个路由独享的, 或者组件级）： 
+		- 全局前置守卫：router.beforeEach((to,from , next)=>{})
+			- 当目标路由是登录页面， 清除sessionStorage中的用户信息
+			- 如果不是登录页面，需要检测是否有登陆信息。如果没有让用户先登录, 如果有，直接跳到目标页面
+江山老师 15:38:37 (多人发送)
+
+
+
+import Mock from 'mockjs'
+
+const Users = []
+
+
+for (let i = 0; i < 100; i++) {
+  Users.push(Mock.mock({
+    id: Mock.Random.guid(),
+    name: Mock.Random.cname(),
+    addr: Mock.mock('@county(true)'),
+    'age|18-60': 1,
+    birth: Mock.Random.date(),
+    sex: Mock.Random.integer(0, 1)
+  }))
+}
+
+export default Users
+江山老师 15:39:52 (多人发送)
+/**
+ * Created by jerry on 2017/4/14.
+ */
+
+import Mock from 'mockjs'
+
+const Books = []
+for (let i = 0; i < 100; i++) {
+  Books.push(Mock.mock({
+    id: Mock.Random.guid(),
+    name: Mock.Random.ctitle(2, 12),
+    author: Mock.Random.cname(),
+    description: Mock.Random.csentence(180, 500),
+    publishAt: Mock.Random.date()
+  }))
+}
+
+export {Books}

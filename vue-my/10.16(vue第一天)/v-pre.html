@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		
+		</style>
+		<script src="vue.js"></script>
+		<script>
+		window.onload = function(){
+			var arr = [
+				{name:'a',age:'18'},
+				{name:'b',age:'19'},
+				{name:'c',age:'14'},
+				{name:'d',age:'16'}
+					
+				]
+			var vm =new Vue({
+				
+				el:'#app',
+				data:{
+					a:'nnmmmmmmm',
+					b:'eeeeeeeeee',
+					has:true,
+					mod:'',
+					arr,
+					imgsrc:'1.jpg',
+					msg:123,
+					
+				},
+				
+			})
+		}
+			
+			
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<div v-pre>{{msg}}</div>
+			<div>{{msg}}</div>
+			<div>{{msg}}</div>
+		</div>
+		
+		
+	</body>
+</html>
+

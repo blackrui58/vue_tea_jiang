@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<button @click="add">加一</button>
+			{{a}}
+			<button @click="addarr">追加数据</button><br />
+			<button @click="changearr">更改数据</button>
+			<ul>
+				<li v-for="item in arr">{{item.uname}}</li>
+			</ul>
+		</div>
+		
+		<script src="vue.js"></script>
+		<script>	
+			var arr = [{
+				uname:'angular不错',
+			},{
+				uname:'vue也不错',
+			}];
+			
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					arr,
+					a:3,
+				},
+				watch:{
+//					arr(){
+//						console.log('数组改变了')
+//						//测试若是数组追加数据,将会触发函数
+//						//若是仅仅对数组中的数据进行修改,则不会触发
+//					},
+					arr:{
+						handler:function(){console.log('深度改变')},
+						deep:true,
+					},
+					
+					a:function(val,oldval){
+						console.log(val,oldval)
+					}
+				},
+				methods:{
+					add(){
+						this.a++
+					},
+					addarr(){
+						this.arr.push({uname:'jiahui'})
+					},
+					changearr(){
+						this.arr[0].uname = 'nanann'
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>
+

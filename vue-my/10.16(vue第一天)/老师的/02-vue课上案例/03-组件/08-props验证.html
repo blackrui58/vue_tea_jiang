@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app" >
+			<c1 title = "aaaa"  :list = "listCity"></c1>
+		</div>
+		
+		<script src="../vue.js"></script>
+		<script>
+			Vue.component("c1",{
+				data:function(){
+					return {
+						drop:true
+					};
+				},
+				props:{
+					title:{
+						type:Number
+					},
+					list:{
+						type: Array,
+						default: []
+					}
+				},
+				template:`<div>
+				<span>{{title}}</span>
+				<ul v-show = "drop">
+					<li  v-for = "city in list">{{city}}</li>
+				</ul>	
+				</div>`
+			});
+			
+			new Vue({
+				el: "#app",
+				data:{
+					listCity: ['北京','上海','深圳']
+				}
+			});
+			
+		</script>
+	</body>
+</html>

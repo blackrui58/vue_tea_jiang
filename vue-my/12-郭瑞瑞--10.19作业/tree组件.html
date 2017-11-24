@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			ul,li{
+				list-style-type: none;
+			}
+			.jiantou{transform:rotate(90deg)}
+			.icon{
+				background:url(右箭头.png) no-repeat center;
+				float:left;
+				width:14px;
+				height:14px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<tree :arr='arr'></tree>
+		</div>
+		
+	</body>
+	<script src="vue.js"></script>
+	<script >
+		var arr = [
+			{
+				name:'一级111',
+				flag:false,
+				children:[
+					{
+						name:'二级111',
+						flag:false,
+						children:[
+							{
+								name:'san级111',
+								flag:false,
+							},
+							{
+								name:'san级111',
+								flag:false,
+							},
+							{
+								name:'san级111',
+								flag:false,
+							}
+						]
+					},
+					{
+						name:'二级111',
+						flag:false,
+					},
+					{
+						name:'二级111',
+						flag:false,
+					}
+				]
+			},
+			{
+				name:'一级222',
+				flag:false,
+				children:[
+					{
+						name:'二级222',
+						flag:false,
+					},
+					{
+						name:'二级222',
+						flag:false,
+					},
+					{
+						name:'二级222',
+						flag:false,
+					}
+				]
+			},
+			{
+				name:'一级333',
+				flag:false,
+				children:[
+					{
+						name:'二级333',
+						flag:false,
+					},
+					{
+						name:'二级333',
+						flag:false,
+					},
+					{
+						name:'二级444',
+						flag:false,
+					}
+				]
+			},
+		]
+		
+		
+		Vue.component('tree',{
+			template:`
+				<div class="tree">
+					<ul>
+						<li v-for="item in arr">
+							<i class="icon" @click="down(item)"  :class="{jiantou:item.flag}"></i>
+							{{item.name}}
+							<!--多层嵌套-->
+							<tree :arr='item.children' v-show='item.flag'></tree>
+							
+						</li>
+					</ul>
+				</div>
+			`,
+			props:{
+				arr:{
+					type:Array,
+					default:function(){
+						return [];
+					},
+				}
+			},
+			methods: {
+				//子组件里面的方法可以直接更改从父组件传递过来的数据
+				
+				//正常情况下的话,应该将更改数据的方法传递到父组件中,完成对父组件里面数据的改变
+				down(item){
+					item.flag = !item.flag;					
+				}
+			},
+		})
+		new Vue({
+			el:'#app',
+			data:{
+				arr,
+			}
+		})
+	</script>
+	
+</html>

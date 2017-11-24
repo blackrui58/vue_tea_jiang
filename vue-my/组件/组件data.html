@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<div id="app">
+			<my-component>tianj</my-component>
+			<div my-component='true'></div>
+		</div>
+		
+	
+	</body>
+	
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript">
+		Vue.component('my-component',{
+			name:'my-component',
+			template:`
+				<div>
+					<h1>我们的世界  {{msg}}</h1>
+					<input type="checkbox" v-model="ischeck"/>
+					<p v-if="ischeck">是否显示的测试数据</p>
+				</div>
+				
+				`,
+			data:function(){
+				return{
+					msg:'组件测试信息',
+					ischeck:true,
+				}
+			}
+		})
+		var vm = new Vue({
+			el:'#app',
+			
+		})
+		
+	
+	</script>
+</html>

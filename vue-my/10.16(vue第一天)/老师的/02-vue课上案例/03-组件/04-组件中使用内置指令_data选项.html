@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<c1 title = "我的购物车"></c1>
+		</div>
+		
+		<script src="../vue.js"></script>
+		<script>
+			Vue.component("c1",{
+				data:function(){
+					return {
+						drop:true
+					};
+				},
+				props:[
+					"title"
+				],
+				template:`<div>
+				<span>{{title}}</span>
+				<ul v-show = "drop">
+					<li>001</li>
+					<li>002</li>
+					<li>003</li>
+					<li>004</li>
+					<li>005</li>
+					<li>006</li>
+				</ul>	
+				</div>`
+			});
+			
+			new Vue({
+				el: "#app"
+			});
+			
+		</script>
+	</body>
+</html>
